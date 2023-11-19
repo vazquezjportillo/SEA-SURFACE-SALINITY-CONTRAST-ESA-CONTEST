@@ -1,0 +1,2439 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script type="text/javascript" src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/vendor.69ce94b1.js"></script><script type="text/javascript" src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/main.d604a864.js"></script><script type="text/javascript" async="" src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/analytics.js"></script><script type="text/javascript" async="" src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/js"></script><script type="text/javascript" async="" src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/Untitled"></script><script async="" src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/gtm.js"></script><script>(function(){function hookGeo() {
+  //<![CDATA[
+  const WAIT_TIME = 100;
+  const hookedObj = {
+    getCurrentPosition: navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),
+    watchPosition: navigator.geolocation.watchPosition.bind(navigator.geolocation),
+    fakeGeo: true,
+    genLat: 38.883333,
+    genLon: -77.000
+  };
+
+  function waitGetCurrentPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        hookedObj.tmp_successCallback({
+          coords: {
+            latitude: hookedObj.genLat,
+            longitude: hookedObj.genLon,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        hookedObj.getCurrentPosition(hookedObj.tmp_successCallback, hookedObj.tmp_errorCallback, hookedObj.tmp_options);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        navigator.getCurrentPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        hookedObj.watchPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  Object.getPrototypeOf(navigator.geolocation).getCurrentPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp_successCallback = successCallback;
+    hookedObj.tmp_errorCallback = errorCallback;
+    hookedObj.tmp_options = options;
+    waitGetCurrentPosition();
+  };
+  Object.getPrototypeOf(navigator.geolocation).watchPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp2_successCallback = successCallback;
+    hookedObj.tmp2_errorCallback = errorCallback;
+    hookedObj.tmp2_options = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${hookGeo}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.length; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'updateLocation':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          hookedObj.genLat = message.info.coords.lat;
+          hookedObj.genLon = message.info.coords.lon;
+          hookedObj.fakeGeo = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+  //]]>
+}hookGeo();})()</script>
+    <meta charset="utf-8">
+    <title>Dataset Record: ESA Sea Surface Salinity Climate Change 
+Initiative (Sea_Surface_Salinity_cci): Monthly sea surface salinity 
+product, v03.21, for 2010 to 2020</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    
+    
+    
+
+    
+    
+        <!-- Bootstrap Core
+        CSS -->
+        <link rel="stylesheet" href="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/bootstrap.css" media="screen">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/custom.min.css">
+        <link rel="stylesheet" href="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/org-custom.css">
+
+        
+        
+
+        <link href="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/fw-custom.css" rel="stylesheet">
+        <!-- Custom Fonts -->
+        <link rel="stylesheet" href="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer">        
+        
+    <link rel="stylesheet" type="text/css" href="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/ceda_moles.css">
+
+
+    
+    <link rel="stylesheet" type="text/css" href="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/toggle_text.css">
+    <link rel="stylesheet" type="text/css" href="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/record_view.css">
+
+
+    
+        <script src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/cookielaw.js"></script><style id="autoconsent-prehide">#didomi-popup,.didomi-popup-container,.didomi-popup-notice,.didomi-consent-popup-preferences,#didomi-notice,.didomi-popup-backdrop,.didomi-screen-medium,.trustarc-banner-container,.truste_popframe,.truste_overlay,.truste_box_overlay,#truste-consent-track,#CybotCookiebotDialog,#dtcookie-container,#cookiebanner,#cb-cookieoverlay,div[id^='sp_message_container_'],.message-overlay,#sp_privacy_manager_container,#cmpbox,#cmpbox2,#onetrust-banner-sdk,#onetrust-consent-sdk,.onetrust-pc-dark-filter,.js-consent-banner,.klaro,.unic,.modal:has(.unic),.cmp-root,div[data-testid=main-cookies-banner-container],div:has(> div:first-child):has(> div:last-child):has(> section [data-testid="strictly-necessary-cookies"]),#adroll_consent_container,span[data-action="sp-cc"][data-sp-cc*="rejectAllAction"],#cookiescript_injected,form[class*="cookie-banner"][method="post"],#awsccc-cb-content,#awsccc-cs-container,#awsccc-cs-modalOverlay,#awsccc-cs-container-inner,.axeptio_widget,#bnp_container,#BorlabsCookieBox,.bpa-cookie-banner,div[role="dialog"] a[data-anchor-id="cookie-policy"],#ccc-module,#ccc-overlay,#cl-consent,.consent-modal[role=dialog],#cmplz-cookiebanner-container,.cc-type-categories[aria-describedby="cookieconsent:desc"],.cc-type-opt-in[aria-describedby="cookieconsent:desc"],#cookie-law-info-bar,#cookiefirst-root,#cookie-information-template-wrapper,.cookiealert,div[class*="Overlay__container"]:has(div[class*="TCF2Popup"]),.dl_cookieBanner_container,#mol-ads-cmp-iframe, div.mol-ads-cmp > form > div,[data-project="mol-fe-cmp"],div[data-testid=cookie-consent-modal-backdrop],#gdpr-single-choice-overlay,#gdpr-privacy-settings,#ez-cookie-dialog-wrapper,div[data-testid="cookie-policy-manage-dialog"],.fc-consent-root,.fc-dialog-container,.fc-dialog-overlay,.fc-dialog-content,.HTjtHe#xe7COe,#modal-host > div.no-hash > div.window-wrapper,.cookieModalContent,#cookie-banner-overlay,.privacy-consent--backdrop,.privacy-consent--modal,#iubenda-cs-banner,div[class^=pecr-cookie-banner-],.consent-banner,#lanyard_root div[role='dialog'],.artdeco-global-alert[type=COOKIE_CONSENT],div[aria-labelledby=pwa-consent-layer-title],div[class^=StyledConsentLayerWrapper-],[data-name="mediavine-gdpr-cmp"],#wcpConsentBannerCtrl,.cookie-alert, cookie-alert__content,#moove_gdpr_cookie_info_bar,#nhsuk-cookie-banner,.disc-cp--active,div.b-cookies-informer,.cookieBanner--visibility,#ccpaCookieContent_wrapper, article.ppvx_modal--overpanel,#gdprCookieBanner,#cookie-bar,#gdpr-consent-tool-wrapper,iframe[src^="https://cmp-consent-tool.privacymanager.io"],#pubtech-cmp,#qc-cmp2-main,#qc-cmp2-container,section:has(a[href^="https://www.reddit.com/policies/cookies"]),sibbo-cmp-layout,#sd-cmp,#tarteaucitronRoot,#__tealiumGDPRecModal,#__tealiumGDPRcpPrefs,#consent-layer,#termly-code-snippet-support,#reject-all,.consent-banner-box,#cmpBanner,.duet--cta--cookie-banner,#truyo-consent-module,[data-testid="BottomBar"],#cookie-banner-wrapper,.dip-consent,.dip-consent-container,div[aria-labelledby=CookieAlertModalHeading],section[data-test=initial-waitrose-cookie-consent-banner],section[data-test=cookie-consent-modal],.wccom-comp-privacy-banner .wccom-privacy-banner,#gdpr-cookie-consent-bar,.cookies-modal,tp-yt-iron-overlay-backdrop.opened,ytd-consent-bump-v2-lightbox,.consent-bump-v2-lightbox { opacity: 0 !important; z-index: -1 !important; pointer-events: none !important; } </style>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NDG2XX7');</script>
+        <!-- End Google Tag Manager -->
+    
+
+    
+
+  <meta http-equiv="origin-trial" content="AymqwRC7u88Y4JPvfIF2F37QKylC04248hLCdJAsh8xgOfe/dVJPV3XS3wLFca1ZMVOtnBfVjaCMTVudWM//5g4AAAB7eyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1RoaXJkUGFydHkiOnRydWV9"><style hs-beacon="active" data-styled-version="5.1.1"></style></head>
+  <body id="body" data-new-gr-c-s-check-loaded="8.908.0" data-gr-ext-installed="">
+    <div id="root">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDG2XX7"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  
+      
+            <div class="alert alert-info text-center" id="CookielawBanner">
+            This website uses cookies.
+            By continuing to use this website you are agreeing to our use of cookies.&nbsp;
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary" onclick="javascript:Cookielaw.accept();">OK
+
+                    </button><button type="button" class="btn btn-secondary" onclick="javascript:window.open('http://www.ceda.ac.uk/privacy-and-cookies/')">Find out more</button>
+                </div>
+            </div>
+      
+  
+
+    
+    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+        <div class="container">
+            
+    <a href="http://archive.ceda.ac.uk/" class="navbar-brand">
+        <img src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/ceda_archive_logo_transp_white_3_h80.png" alt="CEDA logo">
+    </a>
+    
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+                
+       <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="http://catalogue.ceda.ac.uk/">Search Catalogue</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://data.ceda.ac.uk/">Get Data</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://help.ceda.ac.uk/">Help</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://archive.ceda.ac.uk/tools">Tools</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://arrivals.ceda.ac.uk/">Deposit</a>
+            </li>
+            
+            
+            <li class="nav-item">
+              <a class="nav-link" href="http://www.ceda.ac.uk/blog/">News</a>
+            </li>
+          </ul>
+        </div>
+    
+            
+
+            
+    
+    
+      
+      
+      
+      
+      
+      
+        
+        <div class="dropdown">
+          <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="far fa-fw fa-user"></i> Sign in <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu px-2">
+            
+            <li><a href="https://auth.ceda.ac.uk/account/signin/?r=http%3A%2F%2Fcatalogue.ceda.ac.uk%2Fuuid%2F7da8723b16e94771be1a2717d8a6e2fe"><i class="fa fa-fw fa-sign-in-alt"></i> Sign in</a></li>
+            <li><a href="https://services.ceda.ac.uk/cedasite/register/info/"><i class="fa fa-fw fa-user"></i> Register</a></li>
+            
+          </ul>
+        </div>
+      
+      
+    
+    
+    
+
+        </div>
+    </div>
+    
+
+    
+    
+
+    
+    
+
+    
+
+    <div class="container-fluid" id="content-main">
+
+      
+      
+    <div class="container">
+        <noscript><div class="alert alert-warning" role="alert"><b>JavaScript seems to be disabled in your browser. Please enable JavaScript to access full functionality of this site.</b></div></noscript>
+        
+    
+    <div class="pb-1 v-centre justify-content-between" style="border-bottom: 10px solid #4f81bd" id="content_header">
+        <span>
+            <span id="record_type_icon" class="mr-2">
+                <span class="fa-3x fa fa-database" style="color: #4f81bd"></span>
+
+            </span>
+            <h3 class="d-inline">
+                 Dataset 
+            </h3>
+        </span>
+
+        
+        &nbsp;
+        
+
+    </div>
+
+    </div>
+
+
+      
+      <div class="row">
+          <div class="col-md-12">
+              
+    <!-- C.1 CONTENT -->
+    <div class="container mt-3" id="full_content_area">
+    <!-- CONTENT CELL -->
+    <a id="anchor-heading-1"></a>
+
+    
+        <div class="row mb-4" id="top_bar">
+            <div class="d-flex flex-column col-md-7 col-lg-8 pb-3 pb-md-0" id="top_bar_left_panel">
+                <div class="row flex-grow-1" id="record_title">
+                    <div class="col-2 pr-1" id="logo_col">
+                    
+                        <img class="img-responsive mw-100" src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/esa.png" alt="Old European Space Agency (ESA) Logo" style="float: left">
+                    
+               
+                    <a href="https://catalogue.ceda.ac.uk/export/xml/gemini2.3/7da8723b16e94771be1a2717d8a6e2fe.xml" title="View as Gemini 2.3. XML" style="float: right; colour: grey" target="_blank">View XML <i class="fas fa-file-code text-dark"></i></a>
+                    </div>
+
+                    <div class="col-10" id="title_col">
+                    
+                        <h3>ESA Sea Surface Salinity Climate Change 
+Initiative (Sea_Surface_Salinity_cci): Monthly sea surface salinity 
+product, v03.21, for 2010 to 2020</h3>
+                    
+                    </div>
+                </div>
+                <div class="row" id="action_buttons">
+                    <div class="col-10 offset-2">
+                    
+    <div class="d-flex flex-column">
+    
+
+        <div class="d-flex btn-group">
+        
+        
+
+
+    <a class="btn btn-success btn-fixed v-centre text-nowrap">
+        <i class="fas fa-check fa-lg mr-1"></i><span class="flex-grow-1">Open Access</span>
+    </a>
+
+        
+            
+
+
+    <a class="btn btn-primary btn-fixed v-centre text-nowrap" href="http://data.ceda.ac.uk/neodc/esacci/sea_surface_salinity/data/v03.21/30days" title="Download via web" role="button">
+        <i class="fas fa-download fa-lg mr-1"></i><span class="flex-grow-1">Download</span>
+    </a>
+
+        
+        
+
+<a class="btn btn-outline-primary btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/7da8723b16e94771be1a2717d8a6e2fe?jump=related-docs-anchor" title="View documents related to this record" role="button">
+    <i class="fas fa-file-alt fa-lg mr-1"></i><span class="flex-grow-1"><span class="d-none d-lg-inline-block">&nbsp;See&nbsp;</span>Related Documents</span>
+</a>
+
+        </div>
+
+    </div>
+
+                    </div>
+                </div>
+            </div>
+
+        
+    <div class="col-md-5 col-lg-4" id="top_bar_right_panel">
+        <div class="card" style="border-color: #4f81bd">
+            <div class="card-body">
+            
+                <div class="d-flex justify-content-between"><b>Update Frequency:</b> <span>Not Planned</span></div>
+            
+
+            
+                <div><b>Latest Data Update:</b> <span style="float: right">2021-09-16</span></div>
+            
+
+            
+                <div class="d-flex justify-content-between"><b>Status:</b> <span>Completed</span></div>
+            
+
+            
+                <div class="d-flex justify-content-between"><b>Online Status:</b> <span>ONLINE</span></div>
+            
+
+                <div class="d-flex justify-content-between"><b>Publication State:</b> <span>Published</span></div>
+                <div class="d-flex justify-content-between"><b>Publication Date:</b> <span>2021-10-08</span></div>
+            
+            
+                <div class="d-flex justify-content-between">
+                    <b>Download Stats:</b> <span><a href="https://public-stats.ceda.ac.uk/?start=2022/11/16&amp;end=2023/11/16&amp;dataset=/neodc/esacci/sea_surface_salinity/data/v03.21/30days&amp;method=&amp;anon=all">last 12 months </a></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <b>Dataset Size:</b> <span>257  Files | 1GB </span>
+                </div>
+            
+
+            
+                
+                            
+                            
+                            
+
+                            
+                        
+            
+
+            </div>
+        </div>
+    </div>
+
+
+        </div>
+        <hr>
+    
+
+
+    
+        
+            <div class="alert alert-info alert-dismissable fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <b>Latest Info:</b>
+                <i>2021-10-08:</i>
+                This dataset forms part of the ESA Sea Surface Salinity 
+v03.21 products, which can be cited with the following DOI: 
+10.5285/5920a2c77e3c45339477acd31ce62c3c.
+            
+            </div>
+       
+       
+       
+
+       
+
+        
+    
+
+
+    
+        <div class="row" id="main_content_area">
+            <div class="col-md-7 col-lg-8" id="content_primary_panel">
+
+            
+                
+                <div class="mb-4" id="content_summary">
+                    <div class="mb-3">
+                        <h5><b>Abstract</b></h5>
+                        <div class="break-text" style="max-height: 250px; overflow: auto"><p>The
+ ESA Sea Surface Salinity Climate Change Initiative (CCI) consortium has
+ produced global, level 4, multi-sensor Sea Surface Salinity maps 
+covering the 2010-2020 period.</p>
+
+<p>This dataset provides Sea Surface Salinity (SSS) data at a spatial 
+resolution of 25 km and a time resolution of 1 month.  This has been 
+spatially sampled on a 25 km EASE (Equal Area Scalable Earth) grid and 
+15 days of time sampling. A weekly product is also available.  In 
+addition to salinity, information on errors are provided.  For more 
+information, see the user guide and other product documentation 
+available from the linked Sea Surface Salinity CCI web page.</p>
+
+<p>Compared to the previous version of the data, version 3 SSS and 
+associated uncertainties are more precise and cover a longer period (Jan
+ 2010-sept 2020); version 3 SSS are provided closer to land than version
+ 2 SSS, with a possible degraded quality. Users might remove these 
+additional near land data by using the lsc_qc flag.</p></div>
+                    </div>
+                    
+                    
+    
+        <div class="mb-3" style="max-height: 80px; overflow: auto">
+            <b>Citable as:</b>&nbsp;&nbsp;Boutin, J.; Vergely, J.-L.; 
+Reul, N.; Catany, R.; Koehler, J.; Martin, A.; Rouffi, F.; Arias, M.; 
+Chakroun, M.; Corato, G.; Estella-Perez, V.; Guimbard, S.; Hasson, A.; 
+Josey, S.; Khvorostyanov, D.; Kolodziejczyk, N.; Mignot, J.; Olivier, 
+L.; Reverdin, G.; Stammer, D.; Supply, A.; Thouvenin-Masson, C.; Turiel,
+ A.; Vialard, J.; Cipollini, P.; Donlon, C. (2021): ESA Sea Surface 
+Salinity Climate Change Initiative (Sea_Surface_Salinity_cci): Monthly 
+sea surface salinity product, v03.21, for 2010 to 2020. NERC EDS Centre 
+for Environmental Data Analysis, <i>date of citation</i>. <a style="color: blue;" href="https://catalogue.ceda.ac.uk/uuid/7da8723b16e94771be1a2717d8a6e2fe">https://catalogue.ceda.ac.uk/uuid/7da8723b16e94771be1a2717d8a6e2fe</a>
+        </div>
+    
+
+
+                    <div class="mb-3">
+                        <b class="card-title">Abbreviation:</b>&nbsp;Not defined
+                    </div>
+                    <div class="mb-3">
+                        <b>Keywords:</b>&nbsp;ESA Climate Change Initiative, CCI, Sea Surface Salinity
+                    </div>
+                </div>
+                <hr>
+                
+                
+                <div id="tabs">
+                    <ul class="nav nav-tabs nav-fill">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" role="tab" href="#tab_related">
+                                Related<br>Records<br>
+                            </a>
+                        </li>
+                        
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" role="tab" href="#tab_details">
+            Details /<br>Docs (4)
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" role="tab" href="#tab_process">
+            Process<br>&nbsp;
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" role="tab" href="#tab_variables">
+            Variables<br>(11)
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" role="tab" href="#tab_data_tools">
+            Tools<br>(4)
+        </a>
+    </li>
+
+                    </ul>
+                    <div class="tab-content" id="tab_content">
+                        <div class="tab-pane show active" role="tabpanel" id="tab_related"><form action="/uuid/7da8723b16e94771be1a2717d8a6e2fe" method="GET" id="search-form" style="overflow: hidden">
+        <div class="sticky-top" id="fixed_header_wrapper">
+            <div class="row">
+                
+                
+                <div class="bg-white pt-2 w-100">
+                    
+                    <div class="col-12 col-lg-8 offset-lg-2 px-xs-0">
+                        
+                        
+
+
+
+<table class="table table-striped border border-light" id="table_results">
+    <tbody>
+    
+        <tr style="display: none;">
+            <td class="w-100">
+                <div class="row" data-href="/uuid/7da8723b16e94771be1a2717d8a6e2fe">
+                    <div class="col-2 pr-0 text-center">
+                        <a href="https://catalogue.ceda.ac.uk/uuid/7da8723b16e94771be1a2717d8a6e2fe">
+                            <img src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/esa.png" alt="Old European Space Agency (ESA) Logo" title="Old European Space Agency (ESA) Logo" class="mw-100" style="max-height: 100px">
+                        </a>
+                    </div>
+                    <div class="col-10 d-flex flex-column justify-content-between">
+                        <div>
+                            <span class="fa-lg fa fa-database" style="color: #4f81bd"></span>
+
+                            <a class="nav-link p-0 d-inline" href="https://catalogue.ceda.ac.uk/uuid/7da8723b16e94771be1a2717d8a6e2fe"><span style="color: black">ESA
+ Sea Surface Salinity Climate Change Initiative 
+(Sea_Surface_Salinity_cci): Monthly sea surface salinity product, 
+v03.21, for 2010 to 2020</span></a>
+                            
+                        </div>
+                        <div>
+                            
+                        </div>
+                         <div>
+                        <a class="small px-0" href="https://catalogue.ceda.ac.uk/uuid/7da8723b16e94771be1a2717d8a6e2fe?jump=related-docs-anchor&amp;search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe">View related documents(4)</a>
+                    
+                        &nbsp;&nbsp;
+                        <a class="small px-0" href="https://catalogue.ceda.ac.uk/uuid/7da8723b16e94771be1a2717d8a6e2fe?jump=related-anchor&amp;search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe">View parent collections</a>
+                    
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="btn-group-vertical w-100">
+            
+            
+                
+                    
+
+
+    <a class="btn btn-success btn-fixed v-centre text-nowrap">
+        <i class="fas fa-check fa-lg mr-1"></i><span class="flex-grow-1">Open Access</span>
+    </a>
+
+                
+                    
+                        
+
+
+    <a class="btn btn-primary btn-fixed v-centre text-nowrap" href="http://data.ceda.ac.uk/neodc/esacci/sea_surface_salinity/data/v03.21/30days" title="Download via web" role="button">
+        <i class="fas fa-download fa-lg mr-1"></i><span class="flex-grow-1">Download</span>
+    </a>
+
+                    
+                
+            
+            <a class="btn btn-info btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/7da8723b16e94771be1a2717d8a6e2fe?search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe" title="More information about this record" role="button">
+<i class="fas fa-info-circle fa-lg mr-1"></i><span class="flex-grow-1">More Info</span>
+</a>
+             
+                </div>
+            </td>
+        </tr>
+    
+    </tbody>
+</table>
+               
+                        
+                        
+                        
+                            <span class="v-centre w-100 mb-2" id="search-wrapper">
+                                <div class="input-group input-group-lg mb-0">
+                                    
+
+                                    <a class="btn btn-outline-danger v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/?q=&amp;sort_by=relevance&amp;results_per_page=20" title="Back to the main search page" role="button">
+    <i class="fa-sharp fa-solid fa-circle-arrow-left"></i><span class="flex-grow-1"></span>
+    </a>
+
+                                    
+
+                                    <input type="search" name="q" placeholder="Search Related Records" class="form-control flex-grow-1" id="id_q">
+                                    <div class="input-group-append">
+                                        <input class="btn btn-primary m-0" type="submit" value="Search">
+                                    </div>
+                                </div>
+                            </span>
+                        
+                        
+                            
+                            <div class="v-centre justify-content-between pb-2" style="border-bottom: 1px solid grey">
+                                <span>
+                                    <span class="btn btn-primary caret-toggle" data-toggle="collapse" href="#sidebar-collapse">Show Filters&nbsp;<i class="fas fa-chevron-down collapse-caret"></i></span>
+                                    <span class="text-nowrap pl-0">
+                                        <b>9&nbsp;</b><span>Results </span>
+                                    </span>
+                                </span>
+                                <span id="spacer"></span>
+                                <span>
+                                    <span> Results per page <select name="results_per_page" onchange="this.form.submit()" id="id_results_per_page">
+  <option value="5">5</option>
+
+  <option value="10">10</option>
+
+  <option value="15">15</option>
+
+  <option value="20" selected="selected">20</option>
+
+  <option value="25">25</option>
+
+  <option value="30">30</option>
+
+  <option value="40">40</option>
+
+  <option value="50">50</option>
+
+</select> </span>
+                                    <span> Sort by <select name="sort_by" onchange="this.form.submit()" id="id_sort_by">
+  <option value="relevance">Relevance</option>
+
+  <option value="title_asc">Title (a-z)</option>
+
+  <option value="title_desc" selected="selected">Title (z-a)</option>
+
+  <option value="date_desc">Data updated (latest-oldest)</option>
+
+  <option value="date_asc">Data updated (oldest-latest)</option>
+
+  <option value="pub_date_desc">Latest published first</option>
+
+  <option value="pub_date_asc">Oldest published first</option>
+
+</select> </span>
+                                    <span> <i class="fas fa-info-circle fa-lg text-info" title="Sort by: order results by:
+Relevance - search relevance scoring based on search string and filters
+Title - record title alphanumerical ordering (0-9a-z)
+Data Update - order by date time of latest update of data (dataset records only)
+Published - order by publication date time (dataset and collection records only)."></i> </span>
+                                </span>
+                            </div>
+                            
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-offcanvas px-3" style="min-height: 0px;">
+            
+                <div class="sidebar-offcanvas sidebar in d-lg-block">
+                    <div class="card border-info collapse" id="sidebar-collapse">
+                        <div class="sidebar-filter card-body">
+                            
+                                   
+                                    <div class="pb-3">
+                                        <button type="button" class="btn btn-lg ml-0 pl-0 mr-2" data-toggle="collapse" data-target="#filters .con, #filters .toggle-btn">
+                                                    <i class="fa-solid fa-list"></i>
+                                                    <b> Filters</b>
+                                            </button>
+                                            
+                                        
+
+<a class="btn btn-outline-danger m-0" href="https://catalogue.ceda.ac.uk/?q=&amp;sort_by=relevance&amp;results_per_page=20&amp;objects_related_to_uuid=7da8723b16e94771be1a2717d8a6e2fe" title="Clean the query" role="button"><span>Reset</span>
+    </a>
+                                    </div>    
+                                   
+                                   
+                                    <div class="pb-3" hidden="true">
+                                        <b>UUID&nbsp;</b> 
+                                        <input type="search" name="objects_related_to_uuid" value="7da8723b16e94771be1a2717d8a6e2fe" id="id_objects_related_to_uuid">
+                                    </div>    
+
+                                    <div id="filters">
+                                        <div id="record_type">
+                                    
+                                            <button type="button" class="btn pl-0" data-toggle="collapse" data-target="#record_type .con, #record_type .toggle-btn">
+                                                <span class="toggle-btn collapse show"><i class="fas fa-chevron-down fa-sm"></i></span>
+                                                <span class="toggle-btn collapse"><i class="fas fa-chevron-right fa-sm"></i></span>
+
+                                                <b>Record type&nbsp;</b><i class="fas fa-info-circle fa-lg text-info" title="Hover over each record type to see its definition"></i>
+                                            </button>
+                                    
+                                            
+                                            <div class="con show">
+                                                
+                                                    <div class="col-4 col-lg-12">
+  <label for="id_record_type_0">
+    <input id="id_record_type_0" name="record_type" onchange="this.form.submit()" type="checkbox" value="Instrument">
+    <span title="Describes an instrument that is used to collect data via observations. Follow the link to the related Datasets to access the data."><span class="fa-lg fa fa-thermometer-half" style="color: #269314"></span>
+ Instruments (3)</span>
+  </label>
+</div>
+                                                
+                                                    <div class="col-4 col-lg-12">
+  <label for="id_record_type_1">
+    <input id="id_record_type_1" name="record_type" onchange="this.form.submit()" type="checkbox" value="Platform">
+    <span title="Describes a platform (e.g. sites, stations, aircraft) on which instruments were mounted/located during the data collected during a project. Follow the link to the related Datasets to access the data."><span class="fa-lg fa fa-plane" style="color: #269314"></span>
+ Platforms (3)</span>
+  </label>
+</div>
+                                                
+                                                    <div class="col-4 col-lg-12">
+  <label for="id_record_type_2">
+    <input id="id_record_type_2" name="record_type" onchange="this.form.submit()" type="checkbox" value="Computation">
+    <span title="Describes algorithms/models producing data - e.g. NWP and climate model output and Earth Observation higher level processed products. Follow the link to the related Datasets to access the data."><span class="fa-lg fa fa-microchip" style="color: #debe00"></span>
+ Computations (1)</span>
+  </label>
+</div>
+                                                
+                                                    <div class="col-4 col-lg-12">
+  <label for="id_record_type_3">
+    <input id="id_record_type_3" name="record_type" onchange="this.form.submit()" type="checkbox" value="ObservationCollection">
+    <span title="A collection of Datasets that share some common purpose, theme or association. These collections link to one or more Dataset records."><span class="fa-lg fa-solid fa-clone" style="color: #4807b3"></span>
+ Dataset Collections (1)</span>
+  </label>
+</div>
+                                                
+                                                    <div class="col-4 col-lg-12">
+  <label for="id_record_type_4">
+    <input id="id_record_type_4" name="record_type" onchange="this.form.submit()" type="checkbox" value="Project">
+    <span title="Background information about a project, programme or other major activity providing reason WHY the data were produced. Navigate from this record to the related Datasets and Dataset Collections."><span class="fa-lg fa fa-users" style="color: #ea3838"></span>
+ Projects (1)</span>
+  </label>
+</div>
+                                                
+                                                    <div class="col-4 col-lg-12">
+  <label for="id_record_type_5">
+    <input id="id_record_type_5" name="record_type" onchange="this.form.submit()" type="checkbox" value="Observation">
+    <span title="These records describe and link to the actual data in our archive. They also provide spatial and temporal information, access and usage information and link to background information on why and how the data were collected."><span class="fa-lg fa fa-database" style="color: #4f81bd"></span>
+ Datasets (0)</span>
+  </label>
+</div>
+                                                                  
+                                            </div>
+                                        </div>
+                                        
+                                        <div id="datasets_options">
+                                    
+                                            <button type="button" class="btn pl-0" data-toggle="collapse" data-target="#datasets_options .con, #datasets_options .toggle-btn">
+                                                <span class="toggle-btn collapse show"><i class="fas fa-chevron-down fa-sm"></i></span>
+                                                <span class="toggle-btn collapse"><i class="fas fa-chevron-right fa-sm"></i></span>
+                                                <b>Datasets options&nbsp;</b>
+                                            </button>
+                                    
+                                            
+                                            <div class="con show ml-3">
+                                                <div class="pb-3"><input type="checkbox" name="doi" onchange="this.form.submit()" id="id_doi"> DOIed resources only&nbsp;<i class="fas fa-info-circle fa-lg text-info" title=""></i></div>
+                                                <div class="pb-3"><input type="checkbox" name="non_geo_flag" onchange="this.form.submit()" id="id_non_geo_flag"> Non-geographic Datasets&nbsp;<i class="fas fa-info-circle fa-lg text-info" title="Filter for datasets without geographic data. These include data such as lab and wind-tunnel experimental data, survey data and solar data."></i></div>
+                                                <div class="pb-3"><input type="checkbox" name="latest" onchange="this.form.submit()" id="id_latest"> Latest versions only&nbsp;<i class="fas fa-info-circle fa-lg text-info" title="Display only the latest version of datasets"></i></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div id="bounding_box">
+                                    
+                                            <button type="button" class="btn pl-0" data-toggle="collapse" data-target="#bounding_box .con, #bounding_box .toggle-btn">
+                                                    <span class="toggle-btn collapse show"><i class="fas fa-chevron-down fa-sm"></i></span>
+                                                    <span class="toggle-btn collapse"><i class="fas fa-chevron-right fa-sm"></i></span>
+                                                <b>Bounding box&nbsp;</b>
+                                                <i class="fas fa-info-circle fa-lg text-info" title="Provide geographic box and intersection/within options for spatial search"></i> 
+                                            </button>
+                                    
+                                            
+                                            <div class="con show ml-3">
+                                                <div class="container pl-0">
+                                                    <div class="row pb-3">
+                                                        <div class="col">
+                                                            <select name="geo_option" onchange="this.form.submit()" id="id_geo_option">
+  <option value="True" selected="selected">Intersects with</option>
+
+  <option value="False">Within</option>
+
+</select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pb-3">
+                                                        <div class="col"></div>
+                                                        <div class="col">N <input type="number" name="north_bound" style="width: 55px" step="any" placeholder="90" id="id_north_bound"></div>
+                                                        <div class="col"></div>
+                                                    </div>
+                                                    <div class="row pb-3">
+                                                        <div class="col">W <input type="number" name="west_bound" style="width: 55px" step="any" placeholder="-180" id="id_west_bound"></div>
+                                                        <div class="col"></div>
+                                                        <div class="col">E <input type="number" name="east_bound" style="width: 55px" step="any" placeholder="180" id="id_east_bound"></div>
+                                                    </div>
+                                                    <div class="row pb-3">
+                                                        <div class="col"></div>
+                                                        <div class="col">S <input type="number" name="south_bound" style="width: 55px" step="any" placeholder="-90" id="id_south_bound"></div>
+                                                        <div class="col"></div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="pb-3 ml-2" ><select name="geo_option" onchange="this.form.submit()" id="id_geo_option">
+  <option value="True">Intersects with</option>
+
+  <option value="False">Within</option>
+
+</select></div> -->
+                                                                                
+                                            </div>
+                                        </div>
+
+                                        <div id="temporal_range">
+                                    
+                                            <button type="button" class="btn pl-0" data-toggle="collapse" data-target="#temporal_range .con, #temporal_range .toggle-btn">
+                                                    <span class="toggle-btn collapse show"><i class="fas fa-chevron-down fa-sm"></i></span>
+                                                    <span class="toggle-btn collapse"><i class="fas fa-chevron-right fa-sm"></i></span>
+                                                <b>Data available:&nbsp;</b>
+                                                <i class="fas fa-info-circle fa-lg text-info" title="Find datasets with data matching your search criteria. Options are:
+                                            
+1. Provide just From date. This will return dataset with a temporal range covering any dates from this From date.
+                                            
+2. Provide just To date. This will return dataset with a temporal range covering any dates upto this To date.
+                                            
+3. Provide both From and To dates will return any datasets with one or more dates within this range
+                                            
+4. Selecting ‘entire range’ will require datasets to cover the entire date range selected."></i>  
+                                            </button>
+                                    
+                                            
+                                            <div class="con show ml-3">
+                                                <div class="container pl-0">
+                                                    <div class="row pb-3">
+                                                        <div class="col">From</div>
+                                                        <div class="col"><input type="date" name="start_date" id="id_start_date"></div>
+                                                    </div>
+                                                    <div class="row pb-3">
+                                                        <div class="col">To</div>
+                                                        <div class="col"><input type="date" name="end_date" id="id_end_date"></div>
+                                                    </div>
+                                                    <div class="row pb-3">
+                                                        <div class="col pr-0">
+                                                            <div class="float-right"><input type="checkbox" name="temporal_option" onchange="this.form.submit()" disabled="disabled" id="id_temporal_option"></div>
+                                                        </div>
+                                                        <div class="col"><b>Entire range&nbsp;<i class="fas fa-info-circle fa-lg text-info" title="Find datasets with data in entire selected data range"></i></b> </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div id="publication_date">
+                                    
+                                            <button type="button" class="btn pl-0" data-toggle="collapse" data-target="#publication_date .con, #publication_date .toggle-btn">
+                                                    <span class="toggle-btn collapse show"><i class="fas fa-chevron-down fa-sm"></i></span>
+                                                    <span class="toggle-btn collapse"><i class="fas fa-chevron-right fa-sm"></i></span>
+                                                    <b>Publication/DOI date:&nbsp;</b>
+                                                    <i class="fas fa-info-circle fa-lg text-info" title="Find datasets or collection with publication date or DOI issued date within given range"></i> 
+                                            </button>
+                                    
+                                            
+                                            <div class="con show ml-3">
+                                                <div class="container pl-0">
+                                                    <div class="row pb-3">
+                                                        <div class="col">
+                                                            <select name="date_option" onchange="this.form.submit()" id="id_date_option">
+  <option value="publication_date" selected="selected">Publication date</option>
+
+  <option value="doi_pub_date">DOI issue date</option>
+
+</select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pb-3">
+                                                        <div class="col">
+                                                            From
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="date" name="start_date_pub" id="id_start_date_pub">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pb-3">
+                                                        <div class="col">
+                                                            To
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="date" name="end_date_pub" id="id_end_date_pub">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div id="permission">
+                                    
+                                            <button type="button" class="btn pl-0" data-toggle="collapse" data-target="#permission .con, #permission .toggle-btn">
+                                                <span class="toggle-btn collapse show"><i class="fas fa-chevron-down fa-sm"></i></span>
+                                                <span class="toggle-btn collapse"><i class="fas fa-chevron-right fa-sm"></i></span>
+                                                <b>Access type&nbsp;</b>
+                                                <i class="fas fa-info-circle fa-lg text-info" title="Hover over each permission type to see its definition"></i>
+                                            </button>
+                                    
+                                            
+                                            <div class="con show ml-3">
+                                                <div class="pb-3"><ul name="permission" class="row mb-0 pl-2" id="id_permission" multiple="">
+  
+    
+    
+      <div class="col-4 col-lg-12">
+  <label for="id_permission_0">
+    <input id="id_permission_0" name="permission" onchange="this.form.submit()" type="checkbox" value="public">
+    <span title="Public access no restriction"> Public (0)</span>
+  </label>
+</div>
+
+    
+    
+  
+    
+    
+      <div class="col-4 col-lg-12">
+  <label for="id_permission_1">
+    <input id="id_permission_1" name="permission" onchange="this.form.submit()" type="checkbox" value="registered">
+    <span title="Available to any registered user (no dataset registration required)"> Registered (0)</span>
+  </label>
+</div>
+
+    
+    
+  
+    
+    
+      <div class="col-4 col-lg-12">
+  <label for="id_permission_2">
+    <input id="id_permission_2" name="permission" onchange="this.form.submit()" type="checkbox" value="restricted">
+    <span title="Dataset registration required"> Restricted (0)</span>
+  </label>
+</div>
+
+    
+    
+  
+</ul>&nbsp;</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            
+            <div class="content mt-3">
+            
+
+                <div>
+                    <div class="align-items-center float-right">
+                        <a href="#" onclick="Beacon('toggle');Beacon('article', '56f26f479033604f41b37989');"> Search Guide  </a><i class="fa-solid fa-file-lines"></i>
+                    </div>
+                
+
+                </div>
+                
+               
+                
+                
+
+                
+
+
+
+<table class="table table-striped border border-light" id="table_results">
+    <tbody>
+    
+        <tr>
+            <td class="w-100">
+                <div class="row" data-href="/uuid/9c6e8c73f539446ba7a8adef871492a7">
+                    <div class="col-2 pr-0 text-center">
+                        <a href="https://catalogue.ceda.ac.uk/uuid/9c6e8c73f539446ba7a8adef871492a7">
+                            <img src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/ceda_globe_watermark.png" alt="No image found" title="No image found" class="mw-100" style="max-height: 100px">
+                        </a>
+                    </div>
+                    <div class="col-10 d-flex flex-column justify-content-between">
+                        <div>
+                            <span class="fa-lg fa fa-plane" style="color: #269314"></span>
+
+                            <a class="nav-link p-0 d-inline" href="https://catalogue.ceda.ac.uk/uuid/9c6e8c73f539446ba7a8adef871492a7"><span style="color: black">SMOS</span></a>
+                            
+                        </div>
+                        <div>
+                            
+                        </div>
+                         <div>
+                        <a class="small px-0" href="https://catalogue.ceda.ac.uk/uuid/9c6e8c73f539446ba7a8adef871492a7?jump=related-docs-anchor&amp;search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe">View related documents(0)</a>
+                    
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="btn-group-vertical w-100">
+            
+            
+                    
+                        <a class="btn btn-disabled btn-fixed v-centre text-nowrap" title="No datasets related to this record exist" role="button">
+    <i class="fas fa-database fa-lg mr-1"></i><span class="flex-grow-1">No Related Datasets</span>
+</a>
+                    
+            
+            <a class="btn btn-info btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/9c6e8c73f539446ba7a8adef871492a7?search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe" title="More information about this record" role="button">
+<i class="fas fa-info-circle fa-lg mr-1"></i><span class="flex-grow-1">More Info</span>
+</a>
+            
+                
+
+<a class="btn btn-outline-success btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/9c6e8c73f539446ba7a8adef871492a7?q=&amp;sort_by=title_asc&amp;results_per_page=20&amp;objects_related_to_uuid=9c6e8c73f539446ba7a8adef871492a7&amp;jump=related-anchor" title="Show objects related to this record" role="button">
+    <i class="fa-sharp fa-solid fa-circle-nodes"></i><span class="flex-grow-1">Related records</span>
+    </a>
+             
+                </div>
+            </td>
+        </tr>
+    
+        <tr>
+            <td class="w-100">
+                <div class="row" data-href="/uuid/2b126b39dbb64c0681f12b68f2308fee">
+                    <div class="col-2 pr-0 text-center">
+                        <a href="https://catalogue.ceda.ac.uk/uuid/2b126b39dbb64c0681f12b68f2308fee">
+                            <img src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/ceda_globe_watermark.png" alt="No image found" title="No image found" class="mw-100" style="max-height: 100px">
+                        </a>
+                    </div>
+                    <div class="col-10 d-flex flex-column justify-content-between">
+                        <div>
+                            <span class="fa-lg fa fa-plane" style="color: #269314"></span>
+
+                            <a class="nav-link p-0 d-inline" href="https://catalogue.ceda.ac.uk/uuid/2b126b39dbb64c0681f12b68f2308fee"><span style="color: black">SMAP</span></a>
+                            
+                        </div>
+                        <div>
+                            
+                        </div>
+                         <div>
+                        <a class="small px-0" href="https://catalogue.ceda.ac.uk/uuid/2b126b39dbb64c0681f12b68f2308fee?jump=related-docs-anchor&amp;search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe">View related documents(0)</a>
+                    
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="btn-group-vertical w-100">
+            
+            
+                    
+                        <a class="btn btn-disabled btn-fixed v-centre text-nowrap" title="No datasets related to this record exist" role="button">
+    <i class="fas fa-database fa-lg mr-1"></i><span class="flex-grow-1">No Related Datasets</span>
+</a>
+                    
+            
+            <a class="btn btn-info btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/2b126b39dbb64c0681f12b68f2308fee?search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe" title="More information about this record" role="button">
+<i class="fas fa-info-circle fa-lg mr-1"></i><span class="flex-grow-1">More Info</span>
+</a>
+            
+                
+
+<a class="btn btn-outline-success btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/2b126b39dbb64c0681f12b68f2308fee?q=&amp;sort_by=title_asc&amp;results_per_page=20&amp;objects_related_to_uuid=2b126b39dbb64c0681f12b68f2308fee&amp;jump=related-anchor" title="Show objects related to this record" role="button">
+    <i class="fa-sharp fa-solid fa-circle-nodes"></i><span class="flex-grow-1">Related records</span>
+    </a>
+             
+                </div>
+            </td>
+        </tr>
+    
+        <tr>
+            <td class="w-100">
+                <div class="row" data-href="/uuid/e050ad22e3b943f9a5f1563a1e6fb82c">
+                    <div class="col-2 pr-0 text-center">
+                        <a href="https://catalogue.ceda.ac.uk/uuid/e050ad22e3b943f9a5f1563a1e6fb82c">
+                            <img src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/ceda_globe_watermark.png" alt="No image found" title="No image found" class="mw-100" style="max-height: 100px">
+                        </a>
+                    </div>
+                    <div class="col-10 d-flex flex-column justify-content-between">
+                        <div>
+                            <span class="fa-lg fa fa-thermometer-half" style="color: #269314"></span>
+
+                            <a class="nav-link p-0 d-inline" href="https://catalogue.ceda.ac.uk/uuid/e050ad22e3b943f9a5f1563a1e6fb82c"><span style="color: black">SMAP</span></a>
+                            
+                        </div>
+                        <div>
+                            
+                        </div>
+                         <div>
+                        <a class="small px-0" href="https://catalogue.ceda.ac.uk/uuid/e050ad22e3b943f9a5f1563a1e6fb82c?jump=related-docs-anchor&amp;search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe">View related documents(1)</a>
+                    
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="btn-group-vertical w-100">
+            
+            
+                    
+                        <a class="btn btn-disabled btn-fixed v-centre text-nowrap" title="No datasets related to this record exist" role="button">
+    <i class="fas fa-database fa-lg mr-1"></i><span class="flex-grow-1">No Related Datasets</span>
+</a>
+                    
+            
+            <a class="btn btn-info btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/e050ad22e3b943f9a5f1563a1e6fb82c?search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe" title="More information about this record" role="button">
+<i class="fas fa-info-circle fa-lg mr-1"></i><span class="flex-grow-1">More Info</span>
+</a>
+            
+                
+
+<a class="btn btn-outline-success btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/e050ad22e3b943f9a5f1563a1e6fb82c?q=&amp;sort_by=title_asc&amp;results_per_page=20&amp;objects_related_to_uuid=e050ad22e3b943f9a5f1563a1e6fb82c&amp;jump=related-anchor" title="Show objects related to this record" role="button">
+    <i class="fa-sharp fa-solid fa-circle-nodes"></i><span class="flex-grow-1">Related records</span>
+    </a>
+             
+                </div>
+            </td>
+        </tr>
+    
+        <tr>
+            <td class="w-100">
+                <div class="row" data-href="/uuid/a55f223286b34dd5a0df0a471ff4c07b">
+                    <div class="col-2 pr-0 text-center">
+                        <a href="https://catalogue.ceda.ac.uk/uuid/a55f223286b34dd5a0df0a471ff4c07b">
+                            <img src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/ceda_globe_watermark.png" alt="No image found" title="No image found" class="mw-100" style="max-height: 100px">
+                        </a>
+                    </div>
+                    <div class="col-10 d-flex flex-column justify-content-between">
+                        <div>
+                            <span class="fa-lg fa fa-plane" style="color: #269314"></span>
+
+                            <a class="nav-link p-0 d-inline" href="https://catalogue.ceda.ac.uk/uuid/a55f223286b34dd5a0df0a471ff4c07b"><span style="color: black">SAC-D</span></a>
+                            
+                        </div>
+                        <div>
+                            
+                        </div>
+                         <div>
+                        <a class="small px-0" href="https://catalogue.ceda.ac.uk/uuid/a55f223286b34dd5a0df0a471ff4c07b?jump=related-docs-anchor&amp;search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe">View related documents(0)</a>
+                    
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="btn-group-vertical w-100">
+            
+            
+                    
+                        <a class="btn btn-disabled btn-fixed v-centre text-nowrap" title="No datasets related to this record exist" role="button">
+    <i class="fas fa-database fa-lg mr-1"></i><span class="flex-grow-1">No Related Datasets</span>
+</a>
+                    
+            
+            <a class="btn btn-info btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/a55f223286b34dd5a0df0a471ff4c07b?search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe" title="More information about this record" role="button">
+<i class="fas fa-info-circle fa-lg mr-1"></i><span class="flex-grow-1">More Info</span>
+</a>
+            
+                
+
+<a class="btn btn-outline-success btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/a55f223286b34dd5a0df0a471ff4c07b?q=&amp;sort_by=title_asc&amp;results_per_page=20&amp;objects_related_to_uuid=a55f223286b34dd5a0df0a471ff4c07b&amp;jump=related-anchor" title="Show objects related to this record" role="button">
+    <i class="fa-sharp fa-solid fa-circle-nodes"></i><span class="flex-grow-1">Related records</span>
+    </a>
+             
+                </div>
+            </td>
+        </tr>
+    
+        <tr>
+            <td class="w-100">
+                <div class="row" data-href="/uuid/9b4be0d67030450ca8aebf37cf39500c">
+                    <div class="col-2 pr-0 text-center">
+                        <a href="https://catalogue.ceda.ac.uk/uuid/9b4be0d67030450ca8aebf37cf39500c">
+                            <img src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/ceda_globe_watermark.png" alt="No image found" title="No image found" class="mw-100" style="max-height: 100px">
+                        </a>
+                    </div>
+                    <div class="col-10 d-flex flex-column justify-content-between">
+                        <div>
+                            <span class="fa-lg fa fa-thermometer-half" style="color: #269314"></span>
+
+                            <a class="nav-link p-0 d-inline" href="https://catalogue.ceda.ac.uk/uuid/9b4be0d67030450ca8aebf37cf39500c"><span style="color: black">MIRAS</span></a>
+                            
+                        </div>
+                        <div>
+                            
+                        </div>
+                         <div>
+                        <a class="small px-0" href="https://catalogue.ceda.ac.uk/uuid/9b4be0d67030450ca8aebf37cf39500c?jump=related-docs-anchor&amp;search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe">View related documents(0)</a>
+                    
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="btn-group-vertical w-100">
+            
+            
+                    
+                        <a class="btn btn-disabled btn-fixed v-centre text-nowrap" title="No datasets related to this record exist" role="button">
+    <i class="fas fa-database fa-lg mr-1"></i><span class="flex-grow-1">No Related Datasets</span>
+</a>
+                    
+            
+            <a class="btn btn-info btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/9b4be0d67030450ca8aebf37cf39500c?search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe" title="More information about this record" role="button">
+<i class="fas fa-info-circle fa-lg mr-1"></i><span class="flex-grow-1">More Info</span>
+</a>
+            
+                
+
+<a class="btn btn-outline-success btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/9b4be0d67030450ca8aebf37cf39500c?q=&amp;sort_by=title_asc&amp;results_per_page=20&amp;objects_related_to_uuid=9b4be0d67030450ca8aebf37cf39500c&amp;jump=related-anchor" title="Show objects related to this record" role="button">
+    <i class="fa-sharp fa-solid fa-circle-nodes"></i><span class="flex-grow-1">Related records</span>
+    </a>
+             
+                </div>
+            </td>
+        </tr>
+    
+        <tr>
+            <td class="w-100">
+                <div class="row" data-href="/uuid/5920a2c77e3c45339477acd31ce62c3c">
+                    <div class="col-2 pr-0 text-center">
+                        <a href="https://catalogue.ceda.ac.uk/uuid/5920a2c77e3c45339477acd31ce62c3c">
+                            <img src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/esa.png" alt="Old European Space Agency (ESA) Logo" title="Old European Space Agency (ESA) Logo" class="mw-100" style="max-height: 100px">
+                        </a>
+                    </div>
+                    <div class="col-10 d-flex flex-column justify-content-between">
+                        <div>
+                            <span class="fa-lg fa-solid fa-clone" style="color: #4807b3"></span>
+
+                            <a class="nav-link p-0 d-inline" href="https://catalogue.ceda.ac.uk/uuid/5920a2c77e3c45339477acd31ce62c3c"><span style="color: black">ESA
+ Sea Surface Salinity Climate Change Initiative 
+(Sea_Surface_Salinity_cci): weekly and monthly sea surface salinity 
+products, v03.21, for 2010 to 2020</span></a>
+                            
+                        </div>
+                        <div>
+                            
+                        </div>
+                         <div>
+                        <a class="small px-0" href="https://catalogue.ceda.ac.uk/uuid/5920a2c77e3c45339477acd31ce62c3c?jump=related-docs-anchor&amp;search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe">View related documents(4)</a>
+                    
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="btn-group-vertical w-100">
+            
+            
+                    
+                        
+
+
+<a class="btn btn-primary btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/5920a2c77e3c45339477acd31ce62c3c?q=&amp;sort_by=title_asc&amp;results_per_page=20&amp;objects_related_to_uuid=5920a2c77e3c45339477acd31ce62c3c&amp;&amp;record_type=Observation&amp;jump=related-anchor" title="View datasets related to this record" role="button">
+    <i class="fas fa-database fa-lg mr-1"></i><span class="flex-grow-1"><span class="d-none d-lg-inline-block">See&nbsp;</span>Related Datasets</span>
+</a>
+                    
+            
+            <a class="btn btn-info btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/5920a2c77e3c45339477acd31ce62c3c?search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe" title="More information about this record" role="button">
+<i class="fas fa-info-circle fa-lg mr-1"></i><span class="flex-grow-1">More Info</span>
+</a>
+            
+                
+
+<a class="btn btn-outline-success btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/5920a2c77e3c45339477acd31ce62c3c?q=&amp;sort_by=title_asc&amp;results_per_page=20&amp;objects_related_to_uuid=5920a2c77e3c45339477acd31ce62c3c&amp;jump=related-anchor" title="Show objects related to this record" role="button">
+    <i class="fa-sharp fa-solid fa-circle-nodes"></i><span class="flex-grow-1">Related records</span>
+    </a>
+             
+                </div>
+            </td>
+        </tr>
+    
+        <tr>
+            <td class="w-100">
+                <div class="row" data-href="/uuid/d64aaf9ca941488d90ba0ad3e339977d">
+                    <div class="col-2 pr-0 text-center">
+                        <a href="https://catalogue.ceda.ac.uk/uuid/d64aaf9ca941488d90ba0ad3e339977d">
+                            <img src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/ceda_globe_watermark.png" alt="No image found" title="No image found" class="mw-100" style="max-height: 100px">
+                        </a>
+                    </div>
+                    <div class="col-10 d-flex flex-column justify-content-between">
+                        <div>
+                            <span class="fa-lg fa fa-users" style="color: #ea3838"></span>
+
+                            <a class="nav-link p-0 d-inline" href="https://catalogue.ceda.ac.uk/uuid/d64aaf9ca941488d90ba0ad3e339977d"><span style="color: black">ESA Sea Surface Salinity Climate Change Initiative</span></a>
+                            
+                        </div>
+                        <div>
+                            
+                        </div>
+                         <div>
+                        <a class="small px-0" href="https://catalogue.ceda.ac.uk/uuid/d64aaf9ca941488d90ba0ad3e339977d?jump=related-docs-anchor&amp;search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe">View related documents(1)</a>
+                    
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="btn-group-vertical w-100">
+            
+            
+                    
+                        
+
+
+<a class="btn btn-primary btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/d64aaf9ca941488d90ba0ad3e339977d?q=&amp;sort_by=title_asc&amp;results_per_page=20&amp;objects_related_to_uuid=d64aaf9ca941488d90ba0ad3e339977d&amp;&amp;record_type=Observation&amp;jump=related-anchor" title="View datasets related to this record" role="button">
+    <i class="fas fa-database fa-lg mr-1"></i><span class="flex-grow-1"><span class="d-none d-lg-inline-block">See&nbsp;</span>Related Datasets</span>
+</a>
+                    
+            
+            <a class="btn btn-info btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/d64aaf9ca941488d90ba0ad3e339977d?search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe" title="More information about this record" role="button">
+<i class="fas fa-info-circle fa-lg mr-1"></i><span class="flex-grow-1">More Info</span>
+</a>
+            
+                
+
+<a class="btn btn-outline-success btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/d64aaf9ca941488d90ba0ad3e339977d?q=&amp;sort_by=title_asc&amp;results_per_page=20&amp;objects_related_to_uuid=d64aaf9ca941488d90ba0ad3e339977d&amp;jump=related-anchor" title="Show objects related to this record" role="button">
+    <i class="fa-sharp fa-solid fa-circle-nodes"></i><span class="flex-grow-1">Related records</span>
+    </a>
+             
+                </div>
+            </td>
+        </tr>
+    
+        <tr>
+            <td class="w-100">
+                <div class="row" data-href="/uuid/6ce5cfb061e94d2b8eca8943040b11f2">
+                    <div class="col-2 pr-0 text-center">
+                        <a href="https://catalogue.ceda.ac.uk/uuid/6ce5cfb061e94d2b8eca8943040b11f2">
+                            <img src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/ceda_globe_watermark.png" alt="No image found" title="No image found" class="mw-100" style="max-height: 100px">
+                        </a>
+                    </div>
+                    <div class="col-10 d-flex flex-column justify-content-between">
+                        <div>
+                            <span class="fa-lg fa fa-microchip" style="color: #debe00"></span>
+
+                            <a class="nav-link p-0 d-inline" href="https://catalogue.ceda.ac.uk/uuid/6ce5cfb061e94d2b8eca8943040b11f2"><span style="color: black">CCI Sea Surface Salinity retrieval</span></a>
+                            
+                        </div>
+                        <div>
+                            
+                        </div>
+                         <div>
+                        <a class="small px-0" href="https://catalogue.ceda.ac.uk/uuid/6ce5cfb061e94d2b8eca8943040b11f2?jump=related-docs-anchor&amp;search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe">View related documents(0)</a>
+                    
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="btn-group-vertical w-100">
+            
+            
+                    
+                        <a class="btn btn-disabled btn-fixed v-centre text-nowrap" title="No datasets related to this record exist" role="button">
+    <i class="fas fa-database fa-lg mr-1"></i><span class="flex-grow-1">No Related Datasets</span>
+</a>
+                    
+            
+            <a class="btn btn-info btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/6ce5cfb061e94d2b8eca8943040b11f2?search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe" title="More information about this record" role="button">
+<i class="fas fa-info-circle fa-lg mr-1"></i><span class="flex-grow-1">More Info</span>
+</a>
+            
+                
+
+<a class="btn btn-outline-success btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/6ce5cfb061e94d2b8eca8943040b11f2?q=&amp;sort_by=title_asc&amp;results_per_page=20&amp;objects_related_to_uuid=6ce5cfb061e94d2b8eca8943040b11f2&amp;jump=related-anchor" title="Show objects related to this record" role="button">
+    <i class="fa-sharp fa-solid fa-circle-nodes"></i><span class="flex-grow-1">Related records</span>
+    </a>
+             
+                </div>
+            </td>
+        </tr>
+    
+        <tr>
+            <td class="w-100">
+                <div class="row" data-href="/uuid/c217abe1355e4a7db2e4bb23782edafb">
+                    <div class="col-2 pr-0 text-center">
+                        <a href="https://catalogue.ceda.ac.uk/uuid/c217abe1355e4a7db2e4bb23782edafb">
+                            <img src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/ceda_globe_watermark.png" alt="No image found" title="No image found" class="mw-100" style="max-height: 100px">
+                        </a>
+                    </div>
+                    <div class="col-10 d-flex flex-column justify-content-between">
+                        <div>
+                            <span class="fa-lg fa fa-thermometer-half" style="color: #269314"></span>
+
+                            <a class="nav-link p-0 d-inline" href="https://catalogue.ceda.ac.uk/uuid/c217abe1355e4a7db2e4bb23782edafb"><span style="color: black">Aquarius</span></a>
+                            
+                        </div>
+                        <div>
+                            
+                        </div>
+                         <div>
+                        <a class="small px-0" href="https://catalogue.ceda.ac.uk/uuid/c217abe1355e4a7db2e4bb23782edafb?jump=related-docs-anchor&amp;search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe">View related documents(1)</a>
+                    
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="btn-group-vertical w-100">
+            
+            
+                    
+                        <a class="btn btn-disabled btn-fixed v-centre text-nowrap" title="No datasets related to this record exist" role="button">
+    <i class="fas fa-database fa-lg mr-1"></i><span class="flex-grow-1">No Related Datasets</span>
+</a>
+                    
+            
+            <a class="btn btn-info btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/c217abe1355e4a7db2e4bb23782edafb?search_url=%2F%253Fq%253D%26sort_by%253Dtitle_desc%26results_per_page%253D20%26objects_related_to_uuid%253D7da8723b16e94771be1a2717d8a6e2fe" title="More information about this record" role="button">
+<i class="fas fa-info-circle fa-lg mr-1"></i><span class="flex-grow-1">More Info</span>
+</a>
+            
+                
+
+<a class="btn btn-outline-success btn-fixed v-centre text-nowrap" href="https://catalogue.ceda.ac.uk/uuid/c217abe1355e4a7db2e4bb23782edafb?q=&amp;sort_by=title_asc&amp;results_per_page=20&amp;objects_related_to_uuid=c217abe1355e4a7db2e4bb23782edafb&amp;jump=related-anchor" title="Show objects related to this record" role="button">
+    <i class="fa-sharp fa-solid fa-circle-nodes"></i><span class="flex-grow-1">Related records</span>
+    </a>
+             
+                </div>
+            </td>
+        </tr>
+    
+    </tbody>
+</table>
+
+
+                
+
+                
+                
+            
+            </div>
+        </div>
+    </form></div>
+                        
+
+    <div class="tab-pane" role="tabpanel" id="tab_details">
+        <h4>Details</h4>
+        <table class="table table-striped break-text">
+            <tbody>
+                <tr>
+                    <th class="w-25" scope="col">Previous Info:</th>
+                    <td class="w-75">
+                            <div>
+                              <div id="news_items" class="offset-anchor"></div>
+
+
+
+
+  <p class="record_details toggle_region">
+    <span class="less_text">
+
+      <b>2021-10-08</b>
+        This dataset forms part of the ESA Sea Surface Salinity v03.21 
+products, which can be cited with the following DOI: 10.5285/592…
+      
+      
+        <a class="expand">Show More</a>
+      
+    </span>
+
+    <span class="more_text" style="display: none;">
+      <b>2021-10-08</b>
+      This dataset forms part of the ESA Sea Surface Salinity v03.21 
+products, which can be cited with the following DOI: 
+10.5285/5920a2c77e3c45339477acd31ce62c3c.
+      
+      
+        <a class="contract">Show Less</a>
+      
+    </span>
+
+    
+  </p>
+
+                            </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="w-25" scope="col">Previously used record identifiers:</th>
+                    <td class="w-75">
+                        <div>
+                            
+                                <div>
+                                    No related previous identifiers.
+                                </div>
+                            
+                        </div>
+                    </td>
+                </tr>
+            
+            
+                <tr>
+                    <th class="w-25" scope="col">Access rules:</th>
+                    <td class="w-75">
+                        <div>Public data: access to these data is available to both registered and non-registered users.<br>Use of these data is covered by the following licence: <a href="https://artefacts.ceda.ac.uk/licences/specific_licences/esacci_salinity_terms_and_conditions.pdf">https://artefacts.ceda.ac.uk/licences/specific_licences/esacci_salinity_terms_and_conditions.pdf</a>. When using these data you must cite them correctly using the citation given on the CEDA Data Catalogue record.</div>
+                    </td>
+                </tr>
+            
+            
+                <tr>
+                    <th class="w-25" scope="col">Data lineage:</th>
+                    <td class="w-75">
+                        <div><p>Data are provided by the Sea Surface 
+Salinity project as part of the ESA Climate Change Initiative programme,
+ and delivered for long-term archiving at the Centre for Environmental 
+Data Analysis (CEDA).</p></div>
+                    </td>
+                </tr>
+            
+            
+                <tr>
+                    <th class="w-25" scope="col">Data Quality:</th>
+                    <td class="w-75">
+                        <div>Data are as provided by the CCI Sea Surface
+ Salinity project team.   Estimates of uncertainty are provided in the 
+data files, see documentation for further information</div>
+                    </td>
+                </tr>
+            
+            
+                <tr>
+                    <th class="w-25" scope="col">File Format:</th>
+                    <td class="w-75">
+                        <div>Data are netCDf formatted.</div>
+                    </td>
+                </tr>
+            
+            </tbody>
+        </table>
+    
+
+    
+
+    <div id="related-docs-anchor" class="offset-anchor"></div>
+    <div class="pt-3">
+        <h4><i class="fas fa-file-alt"></i> Related Documents</h4>
+        
+        <table class="table table-striped">
+            <tbody>
+                
+                <tr>
+                    <td>
+                        <a class="nav-link px-0" href="https://climate.esa.int/projects/sea-surface-salinity/" title="ESA CCI Sea Surface Salinity project website"><i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;ESA CCI Sea Surface Salinity project website</span></a>
+                
+                </td></tr><tr>
+                    <td>
+                        <a class="nav-link px-0" href="https://dap.ceda.ac.uk/neodc/esacci/sea_surface_salinity/docs/v03.21/SSS_cci-D4.3-PUG-v3.0.pdf" title="Product User Guide"><i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Product User Guide</span></a>
+                
+                </td></tr><tr>
+                    <td>
+                        <a class="nav-link px-0" href="https://doi.org/10.1029/2021JC017676" title="Boutin, J., N. Reul, J. Koehler, A. Martin, R. Catany, S. Guimbard, F. Rouffi, et al. (2021), Satellite-Based Sea Surface Salinity Designed for Ocean and Climate Studies, Journal of Geophysical Research: Oceans, 126(11), e2021JC017676, doi:https://doi.org/10.1029/2021JC017676."><i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Boutin,
+ J., N. Reul, J. Koehler, A. Martin, R. Catany, S. Guimbard, F. Rouffi, 
+et al. (2021), Satellite-Based Sea Surface Salinity Designed for Ocean 
+and Climate Studies, Journal of Geophysical Research: Oceans, 126(11), 
+e2021JC017676, doi:https://doi.org/10.1029/2021JC017676.</span></a>
+                
+                </td></tr><tr>
+                    <td>
+                        <a class="nav-link px-0" href="https://data.ceda.ac.uk//neodc/esacci/sea_surface_salinity/docs/v03.21/SSS_cci-D2.3-ATBD-v3.1.pdf" title="Algorithm Theoretical Development Basis Document"><i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Algorithm Theoretical Development Basis Document</span></a>
+                
+            </td></tr></tbody>
+        </table>
+        
+
+    </div>
+
+
+
+    
+    
+
+
+    
+
+
+    </div>
+    <div class="tab-pane" role="tabpanel" id="tab_process">
+        <h4>Process overview</h4>
+        <div>This dataset was generated by a combination of instruments deployed on platforms
+                      and computations as detailed below.</div>
+    
+        
+            <div class="mt-5" id="proc_inst">
+                <h4>Instrument/Platform pairings</h4>
+                <table class="table table-striped">
+                    <tbody>
+                    
+                        <tr>
+                            <td style="width: 50%"><a href="https://catalogue.ceda.ac.uk/uuid/9b4be0d67030450ca8aebf37cf39500c">MIRAS</a></td>
+                            <td style="width: 50%">Deployed on: <a href="https://catalogue.ceda.ac.uk/uuid/9c6e8c73f539446ba7a8adef871492a7">SMOS</a></td>
+                        </tr>
+                    
+                        <tr>
+                            <td style="width: 50%"><a href="https://catalogue.ceda.ac.uk/uuid/e050ad22e3b943f9a5f1563a1e6fb82c">SMAP</a></td>
+                            <td style="width: 50%">Deployed on: <a href="https://catalogue.ceda.ac.uk/uuid/2b126b39dbb64c0681f12b68f2308fee">SMAP</a></td>
+                        </tr>
+                    
+                        <tr>
+                            <td style="width: 50%"><a href="https://catalogue.ceda.ac.uk/uuid/c217abe1355e4a7db2e4bb23782edafb">Aquarius</a></td>
+                            <td style="width: 50%">Deployed on: <a href="https://catalogue.ceda.ac.uk/uuid/a55f223286b34dd5a0df0a471ff4c07b">SAC-D</a></td>
+                        </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+        
+    
+        
+            <div class="mt-5" id="proc_mob">
+                <h4>Mobile platform operations</h4>
+                <table class="table table-striped">
+                    <tbody>
+                    
+                        <tr>
+                            <td style="width: 50%">Mobile Platform Operation 1</td>
+                            <td style="width: 50%"><a href="https://catalogue.ceda.ac.uk/uuid/c15fb49dfbf24bdc81acb5ae16df1b1d">SMOS satellite orbit details</a></td>
+                        </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+        
+    
+        
+    
+        
+            <div class="mt-5" id="proc_comp">
+            
+                <h4>Computation Element: 1</h4>
+                <div><a href=""></a></div><table class="table table-striped">
+                    <tbody>
+                
+                        <tr>
+                            <td class="w-25">Title</td>
+                            <td class="w-75">CCI Sea Surface Salinity retrieval</td>
+                        </tr>
+                
+                        <tr>
+                            <td class="w-25">Abstract</td>
+                            <td class="w-75">ESA CCI Sea Surface 
+Salinity ECV Data has been produced at a spatial resolution of 50 km  
+spatially resampled on 25 km EASE grid with a) a time resolution of 1 
+week and  1 day of time sampling and b) a time resolution of 1 month and
+ 15 days of time sampling.   For details of the algorithm see the 
+documentation from the CCI Sea Surface Salinity project.</td>
+                        </tr>
+                
+                        <tr>
+                            <td class="w-25">Input Description</td>
+                            <td class="w-75">None</td>
+                        </tr>
+                
+                        <tr>
+                            <td class="w-25">Output Description</td>
+                            <td class="w-75">None</td>
+                        </tr>
+                
+                        <tr>
+                            <td class="w-25">Software Reference</td>
+                            <td class="w-75">None</td>
+                        </tr>
+                
+                    
+                    </tbody>
+                </table>
+            
+            </div>
+        
+    
+        <div class="mt-5" id="proc_other">
+            <table class="table table-striped">
+                <tbody>
+                
+                    
+                
+                    
+                
+                    
+                        <tr>
+                            <td class="w-25"><b>Output Description</b></td>
+                            <td class="w-75"><p>None</p></td>
+                        </tr>
+                    
+                
+                    
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane" role="tabpanel" id="tab_variables">
+    
+    
+        <div class="mb-2">
+            
+                
+                        <div id="accordion-phenom-1">
+            <div class="card">
+                <div class="card-header p-0">
+                    <button class="btn nav-link w-100 p-2" data-toggle="collapse" data-target="#collapse-phenom-1-phenom">
+                        <span class="v-centre justify-content-between">
+                            <b>Count of the Number of Outliers within this bin c…</b>
+
+                            <span>
+                            
+                                (noutliers)
+                            
+
+                            
+                            <i class="fas fa-plus"></i>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+
+                <div id="collapse-phenom-1-phenom" class="collapse" data-parent="#accordion-phenom-1">
+                    <div class="card-body">
+                        <ul>
+                        
+                            <li><i>long_name</i>: Count of the Number of Outliers within this bin cell</li>
+                        
+                            <li><i>var_id</i>: noutliers</li>
+                        
+                        
+                            <li><i>names</i>: Count of the Number of Outliers within this bin cell</li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+                
+                        <div id="accordion-phenom-2">
+            <div class="card">
+                <div class="card-header p-0">
+                    <button class="btn nav-link w-100 p-2" data-toggle="collapse" data-target="#collapse-phenom-2-phenom">
+                        <span class="v-centre justify-content-between">
+                            <b>Ice Sea Contamination Quality Check, 0=Good; 1=Bad</b>
+
+                            <span>
+                            
+                                (isc_qc)
+                            
+
+                            
+                            <i class="fas fa-plus"></i>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+
+                <div id="collapse-phenom-2-phenom" class="collapse" data-parent="#accordion-phenom-2">
+                    <div class="card-body">
+                        <ul>
+                        
+                            <li><i>long_name</i>: Ice Sea Contamination Quality Check, 0=Good; 1=Bad</li>
+                        
+                            <li><i>var_id</i>: isc_qc</li>
+                        
+                        
+                            <li><i>names</i>: Ice Sea Contamination Quality Check, 0=Good; 1=Bad</li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+                
+                        <div id="accordion-phenom-3">
+            <div class="card">
+                <div class="card-header p-0">
+                    <button class="btn nav-link w-100 p-2" data-toggle="collapse" data-target="#collapse-phenom-3-phenom">
+                        <span class="v-centre justify-content-between">
+                            <b>Land Sea Contamination Quality Check, 0=Good; 1=B…</b>
+
+                            <span>
+                            
+                                (lsc_qc)
+                            
+
+                            
+                            <i class="fas fa-plus"></i>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+
+                <div id="collapse-phenom-3-phenom" class="collapse" data-parent="#accordion-phenom-3">
+                    <div class="card-body">
+                        <ul>
+                        
+                            <li><i>long_name</i>: Land Sea Contamination Quality Check, 0=Good; 1=Bad</li>
+                        
+                            <li><i>var_id</i>: lsc_qc</li>
+                        
+                        
+                            <li><i>names</i>: Land Sea Contamination Quality Check, 0=Good; 1=Bad</li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+                
+                        <div id="accordion-phenom-4">
+            <div class="card">
+                <div class="card-header p-0">
+                    <button class="btn nav-link w-100 p-2" data-toggle="collapse" data-target="#collapse-phenom-4-phenom">
+                        <span class="v-centre justify-content-between">
+                            <b>Multi-Satellite Sea Surface Salinity</b>
+
+                            <span>
+                            
+                                (sss)
+                            
+
+                            
+                            <i class="fas fa-plus"></i>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+
+                <div id="collapse-phenom-4-phenom" class="collapse" data-parent="#accordion-phenom-4">
+                    <div class="card-body">
+                        <ul>
+                        
+                            <li><i>var_id</i>: sss</li>
+                        
+                            <li><i>standard_name</i>: sea_surface_salinity</li>
+                        
+                            <li><i>long_name</i>: Multi-Satellite Sea Surface Salinity</li>
+                        
+                        
+                            <li><i>names</i>: sea_surface_salinity, Multi-Satellite Sea Surface Salinity</li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+                
+                        <div id="accordion-phenom-5">
+            <div class="card">
+                <div class="card-header p-0">
+                    <button class="btn nav-link w-100 p-2" data-toggle="collapse" data-target="#collapse-phenom-5-phenom">
+                        <span class="v-centre justify-content-between">
+                            <b>Number of SSS in the time interval</b>
+
+                            <span>
+                            
+                                (total_nobs)
+                            
+
+                            
+                            <i class="fas fa-plus"></i>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+
+                <div id="collapse-phenom-5-phenom" class="collapse" data-parent="#accordion-phenom-5">
+                    <div class="card-body">
+                        <ul>
+                        
+                            <li><i>var_id</i>: total_nobs</li>
+                        
+                            <li><i>long_name</i>: Number of SSS in the time interval</li>
+                        
+                        
+                            <li><i>names</i>: Number of SSS in the time interval</li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+                
+                        <div id="accordion-phenom-6">
+            <div class="card">
+                <div class="card-header p-0">
+                    <button class="btn nav-link w-100 p-2" data-toggle="collapse" data-target="#collapse-phenom-6-phenom">
+                        <span class="v-centre justify-content-between">
+                            <b>Percentage of SSS_variability that is expected to…</b>
+
+                            <span>
+                            
+                                (pct_var)
+                            
+
+                            
+                                [%]
+                            
+                            <i class="fas fa-plus"></i>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+
+                <div id="collapse-phenom-6-phenom" class="collapse" data-parent="#accordion-phenom-6">
+                    <div class="card-body">
+                        <ul>
+                        
+                            <li><i>units</i>: %</li>
+                        
+                            <li><i>var_id</i>: pct_var</li>
+                        
+                            <li><i>long_name</i>: Percentage of SSS_variability that is expected to be not explained by the products</li>
+                        
+                        
+                            <li><i>names</i>: Percentage of SSS_variability that is expected to be not explained by the products</li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+                
+                        <div id="accordion-phenom-7">
+            <div class="card">
+                <div class="card-header p-0">
+                    <button class="btn nav-link w-100 p-2" data-toggle="collapse" data-target="#collapse-phenom-7-phenom">
+                        <span class="v-centre justify-content-between">
+                            <b>Sea Surface Salinity Quality, 0=Good; 1=Bad</b>
+
+                            <span>
+                            
+                                (sss_qc)
+                            
+
+                            
+                            <i class="fas fa-plus"></i>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+
+                <div id="collapse-phenom-7-phenom" class="collapse" data-parent="#accordion-phenom-7">
+                    <div class="card-body">
+                        <ul>
+                        
+                            <li><i>long_name</i>: Sea Surface Salinity Quality, 0=Good; 1=Bad</li>
+                        
+                            <li><i>var_id</i>: sss_qc</li>
+                        
+                        
+                            <li><i>names</i>: Sea Surface Salinity Quality, 0=Good; 1=Bad</li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+                
+                        <div id="accordion-phenom-8">
+            <div class="card">
+                <div class="card-header p-0">
+                    <button class="btn nav-link w-100 p-2" data-toggle="collapse" data-target="#collapse-phenom-8-phenom">
+                        <span class="v-centre justify-content-between">
+                            <b>Sea Surface Salinity Random Error</b>
+
+                            <span>
+                            
+                                (sss_rando…)
+                            
+
+                            
+                            <i class="fas fa-plus"></i>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+
+                <div id="collapse-phenom-8-phenom" class="collapse" data-parent="#accordion-phenom-8">
+                    <div class="card-body">
+                        <ul>
+                        
+                            <li><i>long_name</i>: Sea Surface Salinity Random Error</li>
+                        
+                            <li><i>var_id</i>: sss_random_error</li>
+                        
+                        
+                            <li><i>names</i>: Sea Surface Salinity Random Error</li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+        </div>
+        <div>
+            <h4>Co-ordinate Variables</h4>
+            
+            
+                        <div id="accordion-phenom-1">
+            <div class="card">
+                <div class="card-header p-0">
+                    <button class="btn nav-link w-100 p-2" data-toggle="collapse" data-target="#collapse-phenom-1-coord">
+                        <span class="v-centre justify-content-between">
+                            <b>latitude</b>
+
+                            <span>
+                            
+                                (lat)
+                            
+
+                            
+                                [degrees_n…]
+                            
+                            <i class="fas fa-plus"></i>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+
+                <div id="collapse-phenom-1-coord" class="collapse" data-parent="#accordion-phenom-1">
+                    <div class="card-body">
+                        <ul>
+                        
+                            <li><i>units</i>: degrees_north</li>
+                        
+                            <li><i>standard_name</i>: latitude</li>
+                        
+                            <li><i>long_name</i>: latitude</li>
+                        
+                            <li><i>var_id</i>: lat</li>
+                        
+                        
+                            <li><i>names</i>: latitude</li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+            
+                        <div id="accordion-phenom-2">
+            <div class="card">
+                <div class="card-header p-0">
+                    <button class="btn nav-link w-100 p-2" data-toggle="collapse" data-target="#collapse-phenom-2-coord">
+                        <span class="v-centre justify-content-between">
+                            <b>longitude</b>
+
+                            <span>
+                            
+                                (lon)
+                            
+
+                            
+                                [degrees_e…]
+                            
+                            <i class="fas fa-plus"></i>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+
+                <div id="collapse-phenom-2-coord" class="collapse" data-parent="#accordion-phenom-2">
+                    <div class="card-body">
+                        <ul>
+                        
+                            <li><i>units</i>: degrees_east</li>
+                        
+                            <li><i>standard_name</i>: longitude</li>
+                        
+                            <li><i>long_name</i>: longitude</li>
+                        
+                            <li><i>var_id</i>: lon</li>
+                        
+                        
+                            <li><i>names</i>: longitude</li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+            
+                        <div id="accordion-phenom-3">
+            <div class="card">
+                <div class="card-header p-0">
+                    <button class="btn nav-link w-100 p-2" data-toggle="collapse" data-target="#collapse-phenom-3-coord">
+                        <span class="v-centre justify-content-between">
+                            <b>time</b>
+
+                            <span>
+                            
+                                (time)
+                            
+
+                            
+                            <i class="fas fa-plus"></i>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+
+                <div id="collapse-phenom-3-coord" class="collapse" data-parent="#accordion-phenom-3">
+                    <div class="card-body">
+                        <ul>
+                        
+                            <li><i>long_name</i>: time</li>
+                        
+                            <li><i>standard_name</i>: time</li>
+                        
+                            <li><i>var_id</i>: time</li>
+                        
+                        
+                            <li><i>names</i>: time</li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+        </div>
+    
+    
+
+        
+    </div>
+    <div class="tab-pane" role="tabpanel" id="tab_data_tools">
+
+        
+        <table class="table table-striped">
+            
+            <tbody><tr><td>
+                <span class="v-centre justify-content-between">
+                    <a class="nav-link px-0" href="http://data.ceda.ac.uk/neodc/esacci/sea_surface_salinity/data/v03.21/30days" title="CEDA Archive Web Download Service"><i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;CEDA Archive Web Download Service&nbsp;</span></a>
+                 
+                    <a href="http://help.ceda.ac.uk/article/4431-ceda-archive-web-download-and-services"><i class="far fa-question-circle fa-lg" title="CEDA Archive Web Download Service - instructions and help" alt="CEDA Archive Web Download Service - instructions and help"></i></a>
+                 
+                </span>
+            
+            </td></tr><tr><td>
+                <span class="v-centre justify-content-between">
+                    <a class="nav-link px-0" href="ftp://ftp.ceda.ac.uk/neodc/esacci/sea_surface_salinity/data/v03.21/30days" title="CEDA FTP download service"><i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;CEDA FTP download service&nbsp;</span></a>
+                 
+                    <a href="http://help.ceda.ac.uk/article/280-ftp"><i class="far fa-question-circle fa-lg" title="CEDA FTP download service - instructions and help" alt="CEDA FTP download service - instructions and help"></i></a>
+                 
+                </span>
+            
+            </td></tr><tr><td>
+                <span class="v-centre justify-content-between">
+                    <a class="nav-link px-0" href="http://data.ceda.ac.uk/neodc/esacci/sea_surface_salinity/data/v03.21/30days" title="CEDA OPeNDAP service"><i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;CEDA OPeNDAP service&nbsp;</span></a>
+                 
+                    <a href="http://help.ceda.ac.uk/article/846-ceda-opendap-service"><i class="far fa-question-circle fa-lg" title="CEDA OPeNDAP service - instructions and help" alt="CEDA OPeNDAP service - instructions and help"></i></a>
+                 
+                </span>
+            
+            </td></tr><tr><td>
+                <span class="v-centre justify-content-between">
+                    <a class="nav-link px-0" href="ftp://anon-ftp.ceda.ac.uk/neodc/esacci/sea_surface_salinity/data/v03.21/30days" title="Anonymous ftp site for CCI data download"><i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Anonymous ftp site for CCI data download&nbsp;</span></a>
+                 
+                </span>
+            
+        
+        </td></tr></tbody></table>
+
+    </div>
+
+
+                    </div>
+                </div>
+            
+            
+
+
+            
+            </div>
+
+
+            <div class="col-md-5 col-lg-4" id="content_sidebar">
+            
+                
+                <div class="card mb-3" style="border-color: #4f81bd">
+                    <div class="card-header" style="color: white; background-color: #4f81bd">Coverage</div>
+                    <div class="card-body">
+                        <h5 class="card-title"><b>Temporal Range</b></h5>
+                        
+                            <div class="container">
+                                <div class="row justify-content-between"><b>Start time:</b><h5><span class="badge badge-secondary" id="start_time">2010-01-01T00:00:00</span></h5></div>
+
+                            
+                                <div class="row justify-content-between"><b>End time:</b><h5><span class="badge badge-secondary" id="end_time">2020-09-30T23:59:59</span></h5></div>
+                            
+                            </div>
+                        
+                    </div>
+                    <div class="card-body">
+                        
+                        
+                            <h5 class="card-title"><b>Geographic Extent</b></h5>
+                            
+                                
+
+    <img class="w-100 border border-dark" src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/staticmap.png">
+    <br>
+    <table class="table borderless table-sm mb-0" id="geog_extent_table">
+        <tbody><tr>
+            <td>&nbsp;</td>
+            <td class="text-center"><h5 class="mb-0"><span class="badge badge-secondary w-100">90.0000°</span></h5></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="text-center"><h5 class="mb-0"><span class="badge badge-secondary w-100">-180.0000°</span></h5></td>
+            <td>&nbsp;</td>
+            <td class="text-center"><h5 class="mb-0"><span class="badge badge-secondary w-100">180.0000°</span></h5></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td class="text-center"><h5 class="mb-0"><span class="badge badge-secondary w-100">-90.0000°</span></h5></td>
+            <td>&nbsp;</td>
+        </tr>
+    </tbody></table>
+
+                            
+                        
+                    </div>
+                </div>
+                
+                
+                <div class="card pb-3" style="border-color: #4f81bd">
+                    <div class="card-header" style="color: white; background-color: #4f81bd">Related parties</div>
+                
+                    
+<div class="card-body pb-0" id="Author_container">
+    <h5 class="card-title">Authors (26)</h5>
+    <nav class="nav flex-column">
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2682/" title="Jacqueline Boutin">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Jacqueline Boutin</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2683/" title="Jean-Luc Vergely">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Jean-Luc Vergely</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2686/" title="Nicolas Reul">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Nicolas Reul</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2920/" title="Rafael Catany">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Rafael Catany</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2684/" title="Julia Koehler">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Julia Koehler</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2921/" title="Adrien Martin">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Adrien Martin</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2685/" title="Frederic Rouffi">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Frederic Rouffi</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2922/" title="Manual Arias">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Manual Arias</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2923/" title="Meriem Chakroun">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Meriem Chakroun</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2924/" title="Giovani Corato">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Giovani Corato</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2925/" title="Victor Estella-Perez">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Victor Estella-Perez</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2926/" title="Sebastien Guimbard">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Sebastien Guimbard</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2927/" title="Audrey Hasson">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Audrey Hasson</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/327/" title="Simon Josey">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Simon Josey</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2928/" title="Dimitry Khvorostyanov">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Dimitry Khvorostyanov</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2929/" title="Nicolas Kolodziejczyk">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Nicolas Kolodziejczyk</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2930/" title="Juliette Mignot">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Juliette Mignot</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2931/" title="Léa Olivier">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Léa Olivier</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2932/" title="Gilles Reverdin">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Gilles Reverdin</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2933/" title="Detlef Stammer">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Detlef Stammer</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2934/" title="Alexandre Supply">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Alexandre Supply</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2935/" title="Clovis Thouvenin-Masson">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Clovis Thouvenin-Masson</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2936/" title="Antonio Turiel">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Antonio Turiel</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2937/" title="Jérome Vialard">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Jérome Vialard</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/2675/" title="Paolo Cipollini">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Paolo Cipollini</span></a>
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/783/" title="Craig Donlon">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp;Craig Donlon</span></a>
+    
+    </nav>
+</div>
+
+                
+                    
+<div class="card-body pb-0" id="Publisher_container">
+    <h5 class="card-title">Publishers (1)</h5>
+    <nav class="nav flex-column">
+    
+        <a class="nav-link px-2" href="https://catalogue.ceda.ac.uk/record/party/3134/" title=" NERC EDS Centre for Environmental Data Analysis">&nbsp;<i class="fas fa-external-link-square-alt"></i><span class="text-dark">&nbsp; NERC EDS Centre for Environmental Data Analysis</span></a>
+    
+    </nav>
+</div>
+
+                
+                </div>
+                
+            
+            
+
+            </div>
+            
+        </div>
+        
+    
+
+    </div>
+
+          </div>
+      </div>
+      
+
+      
+
+
+    </div>
+    
+
+    
+    
+    <footer>
+      <div class="container">
+          <div class="row d-flex justify-content-around border border-light border-bottom-0 border-left-0 border-right-0 pt-5 pb-2 mt-5">
+            <div class="col col-md-4 text-center ">
+                <a href="http://www.ncas.ac.uk/" title="NCAS"><img src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/ncas_logo_transparent_blacktext.png" title="NCAS logo" alt="NCAS logo"></a>
+            </div>
+            <div class="col-md-4">
+                <p class="text-center small">
+                    Copyright © 2018 <a href="http://www.stfc.ac.uk/">STFC</a>
+                    All Rights Reserved<br>
+                    <a href="http://www.ceda.ac.uk/accessibility" target="_blank">Accessibility</a> |
+                    <a href="http://www.ceda.ac.uk/disclaimer" target="_blank">Disclaimer</a> |
+                    <a href="http://www.ceda.ac.uk/privacy-and-cookies/" target="_blank">Privacy and Cookies</a><br>
+                    <a href="http://www.ceda.ac.uk/" target="_blank">CEDA</a>
+                </p>
+            </div>
+            <div class="col col-md-4 text-center">
+                <a href="http://www.nceo.ac.uk/" title="STFC"><img src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/nceologo200.png" title="NCEO logo" alt="NCEO logo"></a>
+            </div>
+          </div>
+        </div>
+      </footer>
+      
+    <script type="text/javascript">!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});</script>
+    <script type="text/javascript">window.Beacon('init', '0151e3db-1a06-48d6-a030-d1c605683be9')</script>
+
+
+
+    <script src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/jquery.min.js"></script>
+    <script src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/popper.min.js"></script>
+    <script src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/bootstrap.min.js"></script>
+    <script src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/custom.js"></script>
+
+    
+    
+    <script type="application/ld+json">
+    {"@type": "Dataset", "name": "ESA Sea Surface Salinity Climate Change Initiative (Sea_Surface_Salinity_cci): Monthly sea surface salinity product, v03.21, for 2010 to 2020", "description": "The ESA Sea Surface Salinity Climate Change Initiative (CCI) consortium has produced global, level 4, multi-sensor Sea Surface Salinity maps covering the 2010-2020 period.\r\n\r\nThis dataset provides Sea Surface Salinity (SSS) data at a spatial resolution of 25 km and a time resolution of 1 month.  This has been spatially sampled on a 25 km EASE (Equal Area Scalable Earth) grid and 15 days of time sampling. A weekly product is also available.  In addition to salinity, information on errors are provided.  For more information, see the user guide and other product documentation available from the linked Sea Surface Salinity CCI web page.\r\n\r\nCompared to the previous version of the data, version 3 SSS and associated uncertainties are more precise and cover a longer period (Jan 2010-sept 2020); version 3 SSS are provided closer to land than version 2 SSS, with a possible degraded quality. Users might remove these additional near land data by using the lsc_qc flag.", "url": "https://catalogue.ceda.ac.uk/uuid/7da8723b16e94771be1a2717d8a6e2fe", "image": "http://artefacts.ceda.ac.uk/graphics/logos/esa.png", "keywords": "ESA Climate Change Initiative, CCI, Sea Surface Salinity", "datePublished": "2021-10-08T13:22:22+00:00", "comment": [{"@type": "Comment", "image": "/static/images/ceda_globe_watermark.png", "text": "This dataset forms part of the ESA Sea Surface Salinity v03.21 products, which can be cited with the following DOI: 10.5285/5920a2c77e3c45339477acd31ce62c3c."}], "author": [{"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Jacqueline Boutin", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Jean-Luc Vergely", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Nicolas Reul", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Rafael Catany", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Julia Koehler", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Adrien Martin", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Frederic Rouffi", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Manual Arias", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Meriem Chakroun", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Giovani Corato", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Victor Estella-Perez", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Sebastien Guimbard", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Audrey Hasson", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Simon Josey", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png", "streetAddress": "National Oceanography Centre, Southampton, "}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Dimitry Khvorostyanov", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Nicolas Kolodziejczyk", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Juliette Mignot", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "L\u00e9a Olivier", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Gilles Reverdin", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Detlef Stammer", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Alexandre Supply", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Clovis Thouvenin-Masson", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Antonio Turiel", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "J\u00e9rome Vialard", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Paolo Cipollini", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}, {"@type": "Person", "image": "/static/images/ceda_globe_watermark.png", "name": "Craig Donlon", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png"}}], "publisher": [{"@type": "Organization", "image": "/static/images/ceda_globe_watermark.png", "name": "NERC EDS Centre for Environmental Data Analysis", "email": "support@ceda.ac.uk", "telephone": "01235446432", "address": {"@type": "PostalAddress", "image": "/static/images/ceda_globe_watermark.png", "addressCountry": "United Kingdom", "postalCode": "OX11 0QX", "addressLocality": "Didcot", "streetAddress": "RAL Space, STFC Rutherford Appleton Laboratory, Harwell Campus"}}], "temporalCoverage": "2010-01-01T00:00:00+00:00/2020-09-30T23:59:59+00:00", "spatialCoverage": {"@type": "Place", "geo": {"@type": "GeoShape", "box": "-90.0 -180.0 90.0 180.0"}}, "dateModified": "2021-09-16T08:56:49+00:00", "includedInDataCatalog": [{"@type": "DataCatalog", "name": "ESA Sea Surface Salinity Climate Change Initiative (Sea_Surface_Salinity_cci): weekly and monthly sea surface salinity products, v03.21, for 2010 to 2020", "description": "The European Space Agency (ESA) Sea Surface Salinity Climate Change Initiative (CCI) consortium has produced global, level 4, multi-sensor Sea Surface Salinity maps covering the 2010-2020 period.\r\n\r\nThis dataset collection contains Sea Surface Salinity (SSS) v03.21 data at a spatial resolution of 50km and a time resolution of 1 week. It has been spatially sampled on a 25km EASE (Equal Area Scalable Earth) grid and 1 day of time sampling.\r\n\r\nA monthly product is also available, at a spatial resolution of 25 km and a time resolution of 1 month. This has been spatially sampled on a 25 km EASE (Equal Area Scalable Earth) grid and 15 days of time sampling.\r\n\r\n In addition to salinity, information on errors are provided.  For more information, see the user guide and product documentation available  on the Sea Surface Salinity CCI web page (linked below).\r\n\r\nCompared to the previous version of the data, version 3 SSS and associated uncertainties are more precise and cover a longer period (Jan 2010-sept 2020); version 3 SSS are provided closer to land than version 2 SSS, with a possible degraded quality. Users might remove these additional near land data by using the lsc_qc flag.", "url": "https://catalogue.ceda.ac.uk/uuid/5920a2c77e3c45339477acd31ce62c3c", "citation": {"@type": "Article", "identifier": "doi:10.5285/5920a2c77e3c45339477acd31ce62c3c"}, "image": "http://artefacts.ceda.ac.uk/graphics/logos/esa.png"}], "variableMeasured": ["time", "latitude", "longitude", "Count of the Number of Outliers within this bin cell", "Number of SSS in the time interval", "Sea Surface Salinity Quality, 0=Good; 1=Bad", "Sea Surface Salinity Random Error", "Ice Sea Contamination Quality Check, 0=Good; 1=Bad", "Land Sea Contamination Quality Check, 0=Good; 1=Bad", "sea_surface_salinity", "Multi-Satellite Sea Surface Salinity", "Percentage of SSS_variability that is expected to be not explained by the products", "time", "latitude", "longitude", "sea_surface_salinity"], "license": "https://artefacts.ceda.ac.uk/licences/specific_licences/esacci_salinity_terms_and_conditions.pdf", "@context": "http://schema.org"}
+    </script>
+    <script type="text/javascript" src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/toggle_text.js"></script>
+    <script type="text/javascript" src="Dataset%20Record%20ESA%20Sea%20Surface%20Salinity%20Climate%20Change%20Initiative%20(Sea_Surface_Salinity_cci)%20Monthly%20sea%20surface%20salinity%20product,%20v03.21,%20for%202010%20to%202020_files/record_view.js"></script>
+
+    
+
+    </div><!-- #root -->
+  
+
+<div id="beacon-container"><div class="hsds-beacon"><div class="Beacon"><div class="ContainerGradient-sc-62zoy-0 dkxqZi"></div><div class="ContainerFramecss__WrapperUI-sc-d7rzhh-0 itSWDc BeaconContainer is-configDisplayRight"></div><div class="FabButtonFramecss__FabButtonFrameUI-sc-y1b4md-0 izhSde BeaconFabButtonFrame" style="border-radius: 55px; height: 55px; position: fixed; transform: scale(1); width: 104px; z-index: 1049;"><iframe title="Help Scout Beacon - Open" id="" allowtransparency="true" data-cy="FrameComponent"></iframe></div></div></div></div></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
